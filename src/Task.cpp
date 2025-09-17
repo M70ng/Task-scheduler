@@ -5,9 +5,6 @@
  * Section: 002
  */
 
-#include <iostream>
-#include <string>
-
 #include "Task.h"
 using namespace std;
 
