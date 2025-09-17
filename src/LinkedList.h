@@ -13,16 +13,18 @@ private:
     int size;
 
 public:
-    LinkedList();               // コンストラクタ
-    ~LinkedList();              // デストラクタ
+    LinkedList();               
+    ~LinkedList();              
 
-    void insertTask(const Task& task);   // タスク追加
-    bool deleteTask(const string& taskID); // タスク削除
-    Task* findTask(const string& taskID);  // タスク検索
+    void insertTask(const Task& task);   
+    bool deleteTask(const string& taskID); 
+    Task* findTask(const string& taskID);
 
     bool isEmpty() const;
     int getSize() const;
     void clear();
+
+    Node<Task>* getHead() const { return head; }
 };
 
 #endif // LINKEDLIST_H
