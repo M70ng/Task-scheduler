@@ -16,7 +16,7 @@ Task::Task() {
     dependency = "";
 }
 
-Task::Task(string tID, string desc, int prio, int dead, string dep) {
+Task::Task(const string& tID, const string& desc, int prio, int dead, const string& dep) {
     taskID = tID;
     description = desc;
     priority = prio;

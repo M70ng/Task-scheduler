@@ -22,7 +22,7 @@ private:
     string dependency; // taskID of the task that must be completed before this one
 public:
     Task();
-    Task(string tID, string desc, int prio, int dead, string dep);
+    Task(const string& tID, const string& desc, int prio, int dead, const string& dep);
     string getTaskID() const;
     string getDescription() const;
     int getPriority() const;
