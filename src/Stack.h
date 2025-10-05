@@ -10,43 +10,55 @@
 #include <stdexcept>
 
 template <typename T>
-class Stack {
+class Stack
+{
 private:
-    Node<T>* top;
+    Node<T> *top;
     int size;
 
 public:
-    Stack() {
+    Stack()
+    {
         top = nullptr;
         size = 0;
     }
 
-    ~Stack() {
-        while (!isEmpty()) {
-            pop();
-        }
+    ~Stack()
+    {
+        clear();
     }
 
-    bool isEmpty() const {
+    bool isEmpty() const
+    {
         return size == 0;
     }
 
-    int getSize() const {
+    int getSize() const
+    {
         return size;
     }
 
-    void push(const T& val) {
-        Node<T>* newNode = new Node<T>(val);
+    void clear()
+    {
+        while (!isEmpty())
+            pop();
+    }
+
+    void push(const T &val)
+    {
+        Node<T> *newNode = new Node<T>(val);
         newNode->next = top;
         top = newNode;
         size++;
     }
 
-    T pop() {
-        if (isEmpty()) {
+    T pop()
+    {
+        if (isEmpty())
+        {
             throw std::runtime_error("Stack underflow");
         }
-        Node<T>* temp = top;
+        Node<T> *temp = top;
         T value = temp->data;
         top = top->next;
         delete temp;
@@ -54,8 +66,10 @@ public:
         return value;
     }
 
-    T peek() const {
-        if (isEmpty()) {
+    T peek() const
+    {
+        if (isEmpty())
+        {
             throw std::runtime_error("Stack is empty");
         }
         return top->data;
