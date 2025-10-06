@@ -1,3 +1,13 @@
+ /*
+ * Name: Mio Osawa
+ * Id: 100405763
+ * Instructor: Bita Shadgar
+ * Section: 002
+ * 
+ * LinkedList.h
+ * Doubly linked list implementation for Task objects
+ */
+
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 

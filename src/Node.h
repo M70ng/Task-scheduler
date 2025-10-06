@@ -3,6 +3,9 @@
  * Id: 100405763
  * Instructor: Bita Shadgar
  * Section: 002
+ * 
+ * Node.h
+ * Node structure for doubly linked list
  */
 
 #ifndef NODE_H
@@ -24,15 +27,5 @@ public:
 
     Node(const T& t, Node<T>* n = nullptr, Node<T>* p = nullptr)
     : data(t), next(n), prev(p) {}
-    
-    // Node(){
-    //     next = nullptr;
-    //     prev = nullptr;
-    // }
-    // Node(const T& t, Node<T>* n = nullptr, Node<T>* p = nullptr) {
-    //     data = t;
-    //     next = n;
-    //     prev = p;
-    // }
 };
 #endif // NODE_H

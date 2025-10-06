@@ -1,4 +1,9 @@
-/*
+ /*
+ * Name: Mio Osawa
+ * Id: 100405763
+ * Instructor: Bita Shadgar
+ * Section: 002
+ * 
  * TaskQueue.h
  * Queue for completed Task objects
  */
@@ -26,6 +31,35 @@ public:
         while (!isEmpty()) {
             dequeue();
         }
+    }
+
+    // Deep copy constructor
+    TaskQueue(const TaskQueue& other) {
+        front = rear = nullptr;
+        size = 0;
+        Node<Task>* cur = other.front;
+        while (cur) {
+            enqueue(cur->data);
+            cur = cur->next;
+        }
+    }
+
+    // Deep copy assignment
+    TaskQueue& operator=(const TaskQueue& other) {
+        if (this == &other) return *this;
+        // clear existing
+        while (!isEmpty()) dequeue();
+        Node<Task>* cur = other.front;
+        while (cur) {
+            enqueue(cur->data);
+            cur = cur->next;
+        }
+        return *this;
+    }
+
+    // Clear all elements
+    void clear() {
+        while (!isEmpty()) dequeue();
     }
 
     bool isEmpty() const {

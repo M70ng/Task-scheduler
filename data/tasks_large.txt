@@ -1,4 +1,4 @@
-T001,Write Grant Proposal,4,48,,,
+T001,Write Grant Proposal,4,48,T006,,
 T002,Conduct Market Research,2,60,,,
 T003,Analyze Survey Results,5,36,T002,,
 T004,Design Presentation,6,24,T001,,

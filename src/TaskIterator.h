@@ -1,3 +1,13 @@
+ /*
+ * Name: Mio Osawa
+ * Id: 100405763
+ * Instructor: Bita Shadgar
+ * Section: 002
+ * 
+ * TaskIterator.h
+ * Iterator for Task objects in a linked list
+ */
+
 #ifndef TASKITERATOR_H
 #define TASKITERATOR_H
 
@@ -19,13 +29,13 @@ public:
     bool isEnd() const; 
 };
 
-TaskIterator::TaskIterator(Node<Task>* head) : current(head), start(head) {}
+inline TaskIterator::TaskIterator(Node<Task>* head) : current(head), start(head) {}
 
-bool TaskIterator::hasNext() const {
+inline bool TaskIterator::hasNext() const {
     return current != nullptr;
 }
 
-Task TaskIterator::next() {
+inline Task TaskIterator::next() {
     if (!current) {
         cerr << "Iterator error: no more elements.\n";
         return Task();
@@ -35,11 +45,11 @@ Task TaskIterator::next() {
     return data;
 }
 
-void TaskIterator::reset() {
+inline void TaskIterator::reset() {
     current = start;
 }
 
-bool TaskIterator::isEnd() const {
+inline bool TaskIterator::isEnd() const {
     return current == nullptr;
 }
 
