@@ -29,7 +29,7 @@ int main() {
     }
 
     cout << "\n===== QUEUE TEST =====" << endl;
-    TaskQueue q;  // または TaskQueue completedTasks;
+    TaskQueue q;
 
     q.enqueue(Task("T001", "Write Report", 5, 24, ""));
     q.enqueue(Task("T002", "Research", 2, 48, ""));
@@ -64,3 +64,8 @@ int main() {
     cout << "\nAll structure tests completed successfully.\n";
     return 0;
 }
+
+/*
+g++ test_structures.cpp ../src/Task.cpp -o test_structures
+./test_structures
+*/

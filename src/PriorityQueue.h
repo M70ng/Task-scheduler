@@ -1,60 +1,43 @@
 /*
- * TaskPriorityQueue.h
- * Priority Queue for Task objects (sorted insert)
+ * PriorityQueue.h
+ * Template-based Priority Queue implemented as a sorted linked list.
+ * Lower priority number = higher priority.
  */
 
-#ifndef TASKPRIORITYQUEUE_H
-#define TASKPRIORITYQUEUE_H
+#ifndef PRIORITYQUEUE_H
+#define PRIORITYQUEUE_H
 
 #include "Node.h"
-#include "Task.h"
 #include <stdexcept>
+#include <iostream>
 
-class TaskPriorityQueue {
+template <typename T>
+class PriorityQueue {
 private:
-    Node<Task>* head;
+    Node<T>* front;   // head = highest priority (lowest number)
     int size;
 
-    // 優先度比較 (true → a の方が優先される)
-    bool isHigherPriority(const Task& a, const Task& b) {
-        if (a.getPriority() < b.getPriority()) return true;
-        if (a.getPriority() > b.getPriority()) return false;
-        // priority 同じなら deadline が短い方
-        return a.getDeadline() < b.getDeadline();
-    }
-
 public:
-    TaskPriorityQueue() {
-        head = nullptr;
-        size = 0;
-    }
+    PriorityQueue() : front(nullptr), size(0) {}
+    ~PriorityQueue() { clear(); }
 
-    ~TaskPriorityQueue() {
-        while (!isEmpty()) {
-            dequeue();
-        }
-    }
+    PriorityQueue(const PriorityQueue&) = delete;
+    PriorityQueue& operator=(const PriorityQueue&) = delete;
 
-    bool isEmpty() const {
-        return size == 0;
-    }
+    bool isEmpty() const { return front == nullptr; }
+    int getSize() const { return size; }
 
-    int getSize() const {
-        return size;
-    }
+    // Insert by priority (ascending order: 1, 2, 3, ...)
+    void enqueue(const T& task) {
+        Node<T>* newNode = new Node<T>(task);
 
-    void enqueue(const Task& task) {
-        Node<Task>* newNode = new Node<Task>(task);
-
-        // 先頭が空 or 新タスクの方が高優先度
-        if (head == nullptr || isHigherPriority(task, head->data)) {
-            newNode->next = head;
-            head = newNode;
+        if (isEmpty() || task.getPriority() < front->data.getPriority()) {
+            newNode->next = front;
+            front = newNode;
         } else {
-            Node<Task>* current = head;
-            // 挿入位置を探す
+            Node<T>* current = front;
             while (current->next != nullptr &&
-                   !isHigherPriority(task, current->next->data)) {
+                   current->next->data.getPriority() <= task.getPriority()) {
                 current = current->next;
             }
             newNode->next = current->next;
@@ -63,24 +46,37 @@ public:
         size++;
     }
 
-    Task dequeue() {
-        if (isEmpty()) {
-            throw std::runtime_error("PriorityQueue underflow");
-        }
-        Node<Task>* temp = head;
-        Task task = temp->data;
-        head = head->next;
+    // Remove and return highest-priority task
+    T dequeue() {
+        if (isEmpty()) throw std::runtime_error("PriorityQueue underflow");
+        Node<T>* temp = front;
+        T task = temp->data;
+        front = front->next;
         delete temp;
         size--;
         return task;
     }
 
-    Task peek() const {
+    const T& peek() const {
+        if (isEmpty()) throw std::runtime_error("PriorityQueue is empty");
+        return front->data;
+    }
+
+    void clear() {
+        while (!isEmpty()) dequeue();
+    }
+
+    void displayAll() const {
         if (isEmpty()) {
-            throw std::runtime_error("PriorityQueue is empty");
+            std::cout << "[PriorityQueue is empty]\n";
+            return;
         }
-        return head->data;
+        Node<T>* current = front;
+        while (current) {
+            current->data.display();
+            current = current->next;
+        }
     }
 };
 
-#endif // TASKPRIORITYQUEUE_H
+#endif // PRIORITYQUEUE_H
